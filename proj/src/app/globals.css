@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --ease: cubic-bezier(0.16, 1, 0.3, 1); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body { @apply bg-cream font-body text-[17px] leading-normal text-ink antialiased; overflow-x: hidden; }
+  h1, h2, h3 { @apply font-display font-normal leading-none; }
+  :focus-visible { outline: 3px solid #F9C80E; outline-offset: 3px; }
+}
+
+/* Revelação palavra por palavra */
+.palavra {
+  display: inline-block; opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.is-in .palavra { opacity: 1; transform: none; }
+
+/* Entrada de blocos */
+.rv {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.9s var(--ease) var(--d, 0s), transform 0.9s var(--ease) var(--d, 0s);
+}
+.rv.is-in { opacity: 1; transform: none; }
+
+/* Revelação de fotos por máscara (o observado é o contêiner, nunca o recorte) */
+.mask-rv { opacity: 0; transition: opacity 0.6s var(--ease) var(--d, 0s); }
+.mask-rv img {
+  clip-path: inset(0 0 100% 0); transform: scale(1.18);
+  transition: clip-path 1.1s var(--ease) var(--d, 0s), transform 1.5s var(--ease) var(--d, 0s);
+}
+.mask-rv.is-in { opacity: 1; }
+.mask-rv.is-in img { clip-path: inset(0); transform: scale(1); }
+
+/* Botões */
+.btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-[4px] border-2 border-ink px-6 py-3.5 font-body text-[17px] font-semibold no-underline shadow-btn;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s;
+}
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #4A1210; }
+.btn-sm { @apply px-3.5 py-2 text-[15px]; box-shadow: 3px 3px 0 #4A1210; }
+.btn-yellow { @apply bg-mustard text-ink; }
+.btn-dark { @apply border-cream bg-ink text-cream; box-shadow: 4px 4px 0 #F9C80E; }
+.btn-ghost { @apply border-cream bg-black/40 text-cream backdrop-blur-md; box-shadow: none; }
+.btn-ghost:hover { @apply bg-black/60; transform: none; box-shadow: none; }
+
+/* Carrossel horizontal de avaliações */
+.rev-palco { display: flex; flex-direction: column; justify-content: center; gap: 2rem; padding: 6rem 0; }
+.rev-fita { display: flex; gap: 1.5rem; padding: 12px clamp(16px, 4vw, 56px) 24px; overflow-x: auto; scroll-snap-type: x mandatory; will-change: transform; }
+.rev-track.is-sticky .rev-palco { position: sticky; top: 0; height: 100svh; padding: 78px 0 24px; overflow: hidden; }
+.rev-track.is-sticky .rev-fita { overflow: visible; scroll-snap-type: none; }
+.rev-bar { display: none; }
+.rev-track.is-sticky .rev-bar { display: block; }
+.hint-mb { display: none; }
+@media (max-width: 760px) { .hint-dk { display: none; } .hint-mb { display: inline; } }
+.rev-track.is-sticky .hint-mb { display: none; }
+.rev-track.is-sticky .hint-dk { display: inline; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .palavra, .rv, .mask-rv, .mask-rv img { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
+}
