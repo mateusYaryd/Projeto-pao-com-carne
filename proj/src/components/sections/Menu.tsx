@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Gotas, PALETTES } from "@/components/ui/Gotas";
+import { Gotas } from "@/components/ui/Gotas";
+import { PALETTES } from "@/components/ui/gotas-palettes";
 import { Photo } from "@/components/ui/Photo";
 import { WordReveal } from "@/components/ui/WordReveal";
 import { MENU, type MenuCategory } from "@/data/menu";

@@ -1,4 +1,5 @@
-import { Gotas, PALETTES } from "@/components/ui/Gotas";
+import { Gotas } from "@/components/ui/Gotas";
+import { PALETTES } from "@/components/ui/gotas-palettes";
 import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
