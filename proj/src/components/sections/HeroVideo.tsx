@@ -45,16 +45,7 @@ export function HeroVideo({ src = "/videos/hero.mp4" }: { src?: string }) {
         onPause={() => setPlaying(false)}
         onError={() => setFailed(true)}
       />
-      {!failed && (
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
-          className="absolute bottom-[92px] right-6 z-20 h-11 w-11 rounded-full border-2 border-cream bg-black/45 text-sm font-semibold text-cream backdrop-blur-md transition-colors hover:bg-black/70 sm:bottom-9 sm:right-[92px]"
-        >
-          {playing ? "❚❚" : "▶"}
-        </button>
-      )}
+      
     </>
   );
 }
